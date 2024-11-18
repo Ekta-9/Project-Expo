@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deepfake Detection</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: "Roboto", Arial, sans-serif;
+            background: linear-gradient(135deg, #000000, #1e3a8a, #1b1b2f);
+            color: white;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+        h1 {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 3.5rem;
+            text-shadow: 2px 2px 8px #000, 0px 0px 15px #1e90ff;
+        }
+        .tagline {
+            margin-top: 10px;
+            font-size: 1.5rem;
+            text-align: center;
+            color: #cce7ff;
+            text-shadow: 1px 1px 4px #000;
+        }
+        .center-container {
+            margin-top: 40px; /* Adjust this value for fine-tuning the position */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+        .upload-container {
+            width: 350px;
+            height: 240px;
+            border: 2px dashed #1e90ff;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            cursor: pointer;
+            background: rgba(30, 58, 138, 0.1);
+            box-shadow: 0px 4px 15px rgba(30, 58, 138, 0.5);
+            transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+        }
+        .upload-container:hover {
+            background: rgba(30, 58, 138, 0.2);
+            transform: scale(1.05);
+            box-shadow: 0px 8px 20px rgba(30, 58, 138, 0.8);
+        }
+        .upload-container input {
+            display: none;
+        }
+        .upload-text {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #cce7ff;
+        }
+        .btn {
+            padding: 12px 24px;
+            background: #1e3a8a;
+            color: white;
+            font-size: 1rem;
+            font-weight: bold;
+            border: 2px solid #1e90ff;
+            border-radius: 10px;
+            cursor: pointer;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.7), 0px 0px 10px #1e90ff;
+            transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .btn:hover {
+            background: #1e90ff;
+            transform: scale(1.1);
+            box-shadow: 0px 6px 15px rgba(30, 58, 138, 0.9);
+        }
+        .background-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://static.wixstatic.com/media/a715b5_283d3ccd760b4d8b8be17edf5124892df000.jpg/v1/fill/w_1920,h_1080,al_c,q_90,enc_auto/a715b5_283d3ccd760b4d8b8be17edf5124892df000.jpg'); /* New background image URL */
+            background-size: cover;
+            background-position: center;
+            opacity: 0.15;
+            z-index: -1;
+        }
+        footer {
+            position: absolute;
+            bottom: 10px;
+            font-size: 0.9rem;
+            color: rgba(200, 200, 255, 0.8);
+        }
+    </style>
+</head>
+<body>
+    <div class="background-image"></div>
+    <h1>DEEPFAKE DETECTION</h1>
+    <div class="tagline">Unmask the Truth: Detect Fake Images and Videos Instantly!</div>
+    <div class="center-container">
+        <label class="upload-container">
+            <input type="file" id="fileInput" accept="image/,video/">
+            <span class="upload-text">Drag & Drop your image/video here<br>or click to upload</span>
+        </label>
+        <button class="btn" onclick="redirectToOutput()">Submit</button>
+    </div>
+    <footer>© 2024 Deepfake Detection</footer>
+
+    <script>
+        function redirectToOutput() {
+            const fileInput = document.getElementById("fileInput");
+            if (fileInput.files.length === 0) {
+                alert("Please upload a file before proceeding!");
+            } else {
+                localStorage.setItem("uploadedFileName", fileInput.files[0].name);
+                window.location.href = "output.html";
+            }
+        }
+    </script>
+</body>
+</html>
+
+
