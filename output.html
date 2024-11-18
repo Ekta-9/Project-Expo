@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deepfake Detection Result</title>
+    <style>
+        body {
+            background-color: #F5CFA8; /* (245, 207, 168) */
+            font-family: "Arial", sans-serif;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        h1 {
+            font-size: 3rem;
+            color: #1e3a8a;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .result-container {
+            text-align: center;
+            padding: 20px;
+            border: 2px solid #1e3a8a;
+            border-radius: 10px;
+            background: white;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            width: 80%;
+            max-width: 600px;
+        }
+        #speedometer {
+            width: 300px;
+            height: 150px;
+            margin: 20px auto;
+            position: relative;
+        }
+        #percentage {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2rem;
+            font-weight: bold;
+            color: linear-gradient(110.8deg,rgba(28, 117, 58, 1) 28.5%, rgba(210, 29, 29, 1) 92.1%);
+        }
+        .btn {
+            padding: 12px 24px;
+            background-color: #1e3a8a;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+        .btn:hover {
+            background-color: #1e90ff;
+            transform: scale(1.05);
+        }
+        footer {
+            position: absolute;
+            bottom: 10px;
+            font-size: 0.9rem;
+            color: rgba(0, 0, 0, 0.7);
+        }
+    </style>
+</head>
+<body>
+
+    <h1>DEEPFAKE DETECTION RESULT</h1>
+
+    <div class="result-container">
+        <h2>Uploaded File: <span id="fileName"></span></h2>
+        <div id="speedometer">
+            <svg viewBox="0 0 100 50">
+                <!-- Background arc -->
+                <path d="M 10 50 A 40 40 0 0 1 90 50" fill="none" stroke="#ddd" stroke-width="8"></path>
+                <!-- Dynamic arc -->
+                <path id="arc" d="M 10 50 A 40 40 0 0 1 90 50" fill="none" stroke="red" stroke-width="8" stroke-dasharray="0, 251"></path>
+                <!-- Labels -->
+                <text x="10" y="55" font-size="4" fill="#333">0%</text>
+                <text x="45" y="5" font-size="4" fill="#333">50%</text>
+                <text x="85" y="55" font-size="4" fill="#333">100%</text>
+            </svg>
+            <div id="percentage"></div>
+        </div>
+        <p id="detectionText"></p>
+    </div>
+
+    <button class="btn" onclick="goBack()">Go Back</button>
+
+    <footer>© 2024 Deepfake Detection</footer>
+
+    <script>
+        // Retrieve the uploaded file name from localStorage
+        const fileName = localStorage.getItem("uploadedFileName");
+        document.getElementById("fileName").innerText = fileName;
+
+        // Function to simulate detection result
+        function simulateDetection() {
+            setTimeout(() => {
+                // Simulate fake percentage values
+                const fakePercentage = Math.floor(Math.random() * 100);
+
+                // Update text result
+                const resultText = `Fake: ${fakePercentage}%`;
+                document.getElementById("detectionText").innerText = resultText;
+                document.getElementById("detectionText").style.color = "red";  // Always red for fake
+
+                // Update speedometer
+                updateSpeedometer(fakePercentage);
+
+                // Display fake percentage in the middle
+                document.getElementById("percentage").innerText = `${fakePercentage}%`;
+            }, 2000); // Simulate a delay of 2 seconds
+        }
+
+        // Function to update the speedometer
+        function updateSpeedometer(percentage) {
+            const arc = document.getElementById("arc");
+
+            // Calculate stroke-dasharray for dynamic arc
+            const circumference = 2 * Math.PI * 40; // Radius = 40
+            const offset = (percentage / 100) * circumference;
+            arc.setAttribute("stroke-dasharray", `${offset}, ${circumference}`);
+        }
+
+        // Call the simulateDetection function
+        simulateDetection();
+
+        // Go back to the input page
+        function goBack() {
+            window.location.href = "index.html";
+        }
+    </script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
